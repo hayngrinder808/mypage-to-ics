@@ -1,89 +1,68 @@
-const DaysOfWeek = {
-  Saturday: 0,
-  Sunday: 1,
-  Monday: 2,
-  Tuesday: 3,
-  Wednesday: 4,
-  Thursday: 5,
-  Friday: 6
-}
+// JavaScript dependencies
+const dependencies = {
+  "moment": "https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.3/moment.min.js",
+  "ics": "https://cdn.rawgit.com/angeloashmore/ics-js/master/ics.es5.min.js"
+};
 
-const Meridiem = {
-  AM: "AM",
-  PM: "PM"
-}
+// Load dependencies and run app();
+$.getScript(dependencies["moment"], () => {
+  $.getScript(dependencies["ics"], () => {
+    const app = new App();
+    app.execute();
+  });
+});
 
-class Shift {
-  constructor(dateString, dayOfWeek, startTimeString, endTimeString) {
-    const date = new Date(dateString);
-    date.setDate(date.getDate() + DaysOfWeek[dayOfWeek]);
-
-    const start = new Date(date);
-    const startTime = new Time(startTimeString);
-    start.setTime(start.getTime() + startTime.millisecondsElapsed())
-    this.start = start;
-
-    const end = new Date(date);
-    const endTime = new Time(endTimeString);
-    end.setTime(end.getTime() + endTime.millisecondsElapsed());
-    if (startTime.meridiem == Meridiem.PM && endTime.meridiem == Meridiem.AM) {
-      end.setTime(end.getTime() + (24 * 60 * 60 * 1000));
-    }
-    this.end = end;
-  }
-}
-
-class Time {
-  constructor(time) {
-    const splitTime = time.slice(0, -2).split(":");
-    const meridiem = time.slice(-2).toUpperCase();
-
-    this.hour = parseInt(splitTime[0]) + (meridiem == Meridiem.PM ? 12 : 0);
-    this.minutes = parseInt(splitTime[1]);
-    this.seconds = parseInt(splitTime[2] || 0);
+class App {
+  constructor() {
+    this.ics = new ICS();
+    this.baseDate = null;
   }
 
-  meridiem() {
-    return this.hour < 12 ? Meridiem.AM : Meridiem.PM;
-  }
+  createEventFromElement(element) {
+    const dayOfWeek = $(element).children("td.day:first").text().trim();
+    const startTime = $(element).children("td.time:first").text().trim();
+    const endTime = $(element).children("td.time:nth-child(5)").text().trim();
 
-  secondsElapsed() {
-    return this.hour * 60 * 60 + this.minutes * 60 + this.seconds;
-  }
-
-  millisecondsElapsed() {
-    return this.secondsElapsed() * 1000;
-  }
-}
-
-function app() {
-  const scheduleContainer = $("#pane1 > table:nth-child(2) > tbody > tr:first > td:nth-child(2)");
-  const header = scheduleContainer.find("table:first > tbody > tr:nth-child(2) > td:first");
-  const shifts = scheduleContainer.find("table:nth-child(2) > tbody > tr:not(.disable)");
-
-  const baseDate = header.text().slice(15).trim();
-
-  const ics = new ICS();
-
-  shifts.each(function() {
-    const dayOfWeek = $(this).children("td.day:first").text().trim();
-    const startTime = $(this).children("td.time:first").text().trim();
-    const endTime = $(this).children("td.time:nth-child(5)").text().trim();
-
-    const shift = new Shift(baseDate, dayOfWeek, startTime, endTime);
+    const shift = new Shift(this.baseDate, dayOfWeek, startTime, endTime);
 
     const event = new ICSEvent();
     event.subject = `You work at ${startTime}`;
     event.description = "";
-    event.location = "Apple Store, Ala Moana";
+    event.location = "Apple Store Ala Moana";
     event.start = shift.start;
     event.end = shift.end;
 
-    ics.events.push(event);
-  });
+    this.ics.events.push(event);
+  }
 
-  ics.toBase64((result) => window.location = result);
+  execute() {
+    const scheduleContainer = $("#pane1 > table:nth-child(2) > tbody > tr:first > td:nth-child(2)");
+    const header = scheduleContainer.find("table:first > tbody > tr:nth-child(2) > td:first");
+    const shifts = scheduleContainer.find("table:nth-child(2) > tbody > tr:not(.disable)");
+
+    this.baseDate = header.text().slice(15).trim();
+
+    shifts.each((_, element) => this.createEventFromElement(element));
+
+    this.ics.toBase64((result) => window.location = result);
+  }
 }
 
-const icsJSURL = "https://rawgit.com/angeloashmore/ics-js/master/ics.es5.min.js";
-$.getScript(icsJSURL, () => app());
+class Shift {
+  static momentFormat = "MMM D, YYYY h:mmA";
+
+  constructor(date, dayOfWeek, startTime, endTime) {
+    const weekdays = moment.weekdays();
+    weekdays.unshift(weekdays.pop());
+
+    const start = moment(`${date} ${startTime}`, Shift.momentFormat);
+    start.add(weekdays.indexOf(dayOfWeek), "days");
+
+    const end = moment(`${date} ${endTime}`, Shift.momentFormat);
+    end.add(weekdays.indexOf(dayOfWeek), "days");
+    if (end.isBefore(start)) end.add(1, "days");
+
+    this.start = start.toDate();
+    this.end = end.toDate();
+  }
+}
