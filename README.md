@@ -14,7 +14,11 @@ Add `bookmarklet.js` as a bookmark:
 ## Known Issues
 
 * **Safari on iOS displays "Download Failed" message.**
-  
+
   Ignore this message; this does not affect importing the schedule. Safari on iOS has strict file management.
+
+* **Safari on OS X downloads an "Unknown" file.**
+
+  Add `.ics` to the end of the filename. You should then be able to open it and import your schedule to Calendar.
 
 If you encounter any other issue, please open a new [issue](https://github.com/angeloashmore/mypage-to-ics/issues) with a description.
