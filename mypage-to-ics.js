@@ -83,7 +83,6 @@
 	  function App() {
 	    _classCallCheck(this, App);
 	
-	    console.log(_icsJs2['default']);
 	    this.ics = new _icsJs2['default']();
 	    this.baseDate = null;
 	  }
@@ -104,7 +103,7 @@
 	      event.start = shift.start;
 	      event.end = shift.end;
 	
-	      this.ics.events.push(event);
+	      this.ics.addEvent(event);
 	    }
 	  }, {
 	    key: 'execute',
@@ -195,13 +194,17 @@
 		
 		function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 		
-		var _event = __webpack_require__(1);
+		var _icsEvent = __webpack_require__(1);
 		
-		var _event2 = _interopRequireDefault(_event);
+		var _icsEvent2 = _interopRequireDefault(_icsEvent);
 		
 		var _errorsNoEventsError = __webpack_require__(3);
 		
 		var _errorsNoEventsError2 = _interopRequireDefault(_errorsNoEventsError);
+		
+		var _errorsInvalidEventError = __webpack_require__(2);
+		
+		var _errorsInvalidEventError2 = _interopRequireDefault(_errorsInvalidEventError);
 		
 		var ICS = (function () {
 		  _createClass(ICS, null, [{
@@ -214,33 +217,43 @@
 		    enumerable: true
 		  }, {
 		    key: "Event",
-		    value: _event2["default"],
+		    value: _icsEvent2["default"],
 		    enumerable: true
 		  }]);
 		
 		  function ICS() {
 		    _classCallCheck(this, ICS);
 		
-		    this.events = [];
+		    this._events = [];
 		  }
 		
 		  _createClass(ICS, [{
+		    key: "events",
+		    value: function events() {
+		      return Object.freeze(this._events.slice(0));
+		    }
+		  }, {
 		    key: "addEvent",
 		    value: function addEvent(event) {
-		      if (!(event instanceof _event2["default"])) {
+		      if (!(event instanceof ICS.Event)) {
 		        throw new TypeError("Argument `event` must be an instance of ICSEvent.");
 		      } else if (!event.isValid()) {
-		        throw new InvalidEventError();
+		        throw new _errorsInvalidEventError2["default"]();
 		      }
 		
 		      this._events.push(event);
 		    }
 		  }, {
+		    key: "reset",
+		    value: function reset() {
+		      return this._events = [];
+		    }
+		  }, {
 		    key: "toString",
 		    value: function toString() {
-		      if (this.events.length < 1) throw new _errorsNoEventsError2["default"]();
+		      if (this._events.length < 1) throw new _errorsNoEventsError2["default"]();
 		
-		      var events = this.events.map(function (event) {
+		      var events = this._events.map(function (event) {
 		        return event.toString();
 		      });
 		
@@ -288,15 +301,15 @@
 		
 		var _errorsInvalidEventError2 = _interopRequireDefault(_errorsInvalidEventError);
 		
-		var Event = (function () {
-		  _createClass(Event, null, [{
+		var ICSEvent = (function () {
+		  _createClass(ICSEvent, null, [{
 		    key: "SEPARATOR",
 		    value: "\n",
 		    enumerable: true
 		  }]);
 		
-		  function Event() {
-		    _classCallCheck(this, Event);
+		  function ICSEvent() {
+		    _classCallCheck(this, ICSEvent);
 		
 		    // Required props.
 		    this.subject = null;
@@ -308,11 +321,13 @@
 		    this.location = null;
 		  }
 		
-		  _createClass(Event, [{
+		  _createClass(ICSEvent, [{
 		    key: "isValid",
 		    value: function isValid() {
 		      if (this.subject == undefined || this.start == undefined || this.end == undefined) {
 		        return false;
+		      } else {
+		        return true;
 		      }
 		    }
 		  }, {
@@ -324,7 +339,7 @@
 		      if (this.description != undefined) optionals.push("DESCRIPTION:" + this.description);
 		      if (this.location != undefined) optionals.push("LOCATION:" + this.location);
 		
-		      return ["BEGIN:VEVENT", "CLASS:PUBLIC", "DTSTART;VALUE=DATE:" + ICSEvent.dateToICSFormat(this.start), "DTEND;VALUE=DATE:" + ICSEvent.dateToICSFormat(this.end), "SUMMARY;LANGUAGE=en-us:" + this.subject, optionals.join(Event.SEPARATOR), "TRANSP:TRANSPARENT", "END:VEVENT"].join(Event.SEPARATOR);
+		      return ["BEGIN:VEVENT", "CLASS:PUBLIC", "DTSTART;VALUE=DATE:" + ICSEvent.dateToICSFormat(this.start), "DTEND;VALUE=DATE:" + ICSEvent.dateToICSFormat(this.end), "SUMMARY;LANGUAGE=en-us:" + this.subject, optionals.join(ICSEvent.SEPARATOR), "TRANSP:TRANSPARENT", "END:VEVENT"].join(ICSEvent.SEPARATOR);
 		    }
 		  }], [{
 		    key: "dateToICSFormat",
@@ -344,10 +359,10 @@
 		    }
 		  }]);
 		
-		  return Event;
+		  return ICSEvent;
 		})();
 		
-		exports["default"] = Event;
+		exports["default"] = ICSEvent;
 		module.exports = exports["default"];
 	
 	/***/ },

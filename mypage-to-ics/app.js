@@ -3,7 +3,6 @@ import Shift from 'shift';
 
 export default class App {
   constructor() {
-    console.log(ICS);
     this.ics = new ICS();
     this.baseDate = null;
   }
@@ -22,7 +21,7 @@ export default class App {
     event.start = shift.start;
     event.end = shift.end;
 
-    this.ics.events.push(event);
+    this.ics.addEvent(event)
   }
 
   execute() {

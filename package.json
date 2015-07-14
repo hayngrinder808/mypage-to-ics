@@ -23,7 +23,7 @@
   },
   "homepage": "https://github.com/angeloashmore/mypage-to-ics#readme",
   "dependencies": {
-    "ics-js": "^0.1.2",
+    "ics-js": "^0.2.0",
     "moment": "^2.10.3"
   },
   "devDependencies": {
