@@ -137,7 +137,262 @@
 /* 2 */
 /***/ function(module, exports) {
 
-	!function(e){function t(r){if(n[r])return n[r].exports;var o=n[r]={exports:{},id:r,loaded:!1};return e[r].call(o.exports,o,o.exports,t),o.loaded=!0,o.exports}var n={};return t.m=e,t.c=n,t.p="",t(0)}([function(e,t,n){"use strict";function r(e){return e&&e.__esModule?e:{"default":e}}function o(e,t){if(!(e instanceof t))throw new TypeError("Cannot call a class as a function")}Object.defineProperty(t,"__esModule",{value:!0});var i=function(){function e(e,t){for(var n=0;n<t.length;n++){var r=t[n];r.enumerable=r.enumerable||!1,r.configurable=!0,"value"in r&&(r.writable=!0),Object.defineProperty(e,r.key,r)}}return function(t,n,r){return n&&e(t.prototype,n),r&&e(t,r),t}}(),u=n(1),a=r(u),s=n(3),l=r(s),c=function(){function e(){o(this,e),this.events=[]}return i(e,null,[{key:"MIME_TYPE",value:"text/calendar",enumerable:!0},{key:"SEPARATOR",value:"\n",enumerable:!0},{key:"Event",value:a["default"],enumerable:!0}]),i(e,[{key:"addEvent",value:function(e){if(!(e instanceof a["default"]))throw new TypeError("Argument `event` must be an instance of ICSEvent.");if(!e.isValid())throw new InvalidEventError;this._events.push(e)}},{key:"toString",value:function(){if(this.events.length<1)throw new l["default"];var t=this.events.map(function(e){return e.toString()});return["BEGIN:VCALENDAR","VERSION:2.0",t.join(e.SEPARATOR),"END:VCALENDAR"].join(e.SEPARATOR)}},{key:"toBlob",value:function(){return new Blob([this.toString()],{type:e.MIME_TYPE})}},{key:"toBase64",value:function(e){var t=new window.FileReader;t.readAsDataURL(this.toBlob()),t.onloadend=function(){return e(t.result)}}}]),e}();t["default"]=c,e.exports=t["default"]},function(e,t,n){"use strict";function r(e){return e&&e.__esModule?e:{"default":e}}function o(e,t){if(!(e instanceof t))throw new TypeError("Cannot call a class as a function")}Object.defineProperty(t,"__esModule",{value:!0});var i=function(){function e(e,t){for(var n=0;n<t.length;n++){var r=t[n];r.enumerable=r.enumerable||!1,r.configurable=!0,"value"in r&&(r.writable=!0),Object.defineProperty(e,r.key,r)}}return function(t,n,r){return n&&e(t.prototype,n),r&&e(t,r),t}}(),u=n(2),a=r(u),s=function(){function e(){o(this,e),this.subject=null,this.start=null,this.end=null,this.description=null,this.location=null}return i(e,null,[{key:"SEPARATOR",value:"\n",enumerable:!0}]),i(e,[{key:"isValid",value:function(){return void 0==this.subject||void 0==this.start||void 0==this.end?!1:void 0}},{key:"toString",value:function(){if(!this.isValid())throw new a["default"];var t=[];return void 0!=this.description&&t.push("DESCRIPTION:"+this.description),void 0!=this.location&&t.push("LOCATION:"+this.location),["BEGIN:VEVENT","CLASS:PUBLIC","DTSTART;VALUE=DATE:"+ICSEvent.dateToICSFormat(this.start),"DTEND;VALUE=DATE:"+ICSEvent.dateToICSFormat(this.end),"SUMMARY;LANGUAGE=en-us:"+this.subject,t.join(e.SEPARATOR),"TRANSP:TRANSPARENT","END:VEVENT"].join(e.SEPARATOR)}}],[{key:"dateToICSFormat",value:function(e){if(!(e instanceof Date))throw new TypeError("Argument `date` must be an instance of Date.");var t=("0000"+e.getFullYear().toString()).slice(-4),n=("00"+(e.getMonth()+1).toString()).slice(-2),r=("00"+e.getDate().toString()).slice(-2),o=("00"+e.getHours().toString()).slice(-2),i=("00"+e.getMinutes().toString()).slice(-2),u=("00"+e.getMinutes().toString()).slice(-2),a="T"+o+i+u;return t+n+r+a}}]),e}();t["default"]=s,e.exports=t["default"]},function(e,t){"use strict";function n(e){this.name="InvalidEventError",this.message=e||"Event is not configured correctly."}Object.defineProperty(t,"__esModule",{value:!0}),t["default"]=n,n.prototype=Object.create(Error.prototype),n.prototype.constructor=n,e.exports=t["default"]},function(e,t){"use strict";function n(e){this.name="NoEventsError",this.message=e||"No events added."}Object.defineProperty(t,"__esModule",{value:!0}),t["default"]=n,n.prototype=Object.create(Error.prototype),n.prototype.constructor=n,e.exports=t["default"]}]);
+	/******/ (function(modules) { // webpackBootstrap
+	/******/ 	// The module cache
+	/******/ 	var installedModules = {};
+	/******/
+	/******/ 	// The require function
+	/******/ 	function __webpack_require__(moduleId) {
+	/******/
+	/******/ 		// Check if module is in cache
+	/******/ 		if(installedModules[moduleId])
+	/******/ 			return installedModules[moduleId].exports;
+	/******/
+	/******/ 		// Create a new module (and put it into the cache)
+	/******/ 		var module = installedModules[moduleId] = {
+	/******/ 			exports: {},
+	/******/ 			id: moduleId,
+	/******/ 			loaded: false
+	/******/ 		};
+	/******/
+	/******/ 		// Execute the module function
+	/******/ 		modules[moduleId].call(module.exports, module, module.exports, __webpack_require__);
+	/******/
+	/******/ 		// Flag the module as loaded
+	/******/ 		module.loaded = true;
+	/******/
+	/******/ 		// Return the exports of the module
+	/******/ 		return module.exports;
+	/******/ 	}
+	/******/
+	/******/
+	/******/ 	// expose the modules object (__webpack_modules__)
+	/******/ 	__webpack_require__.m = modules;
+	/******/
+	/******/ 	// expose the module cache
+	/******/ 	__webpack_require__.c = installedModules;
+	/******/
+	/******/ 	// __webpack_public_path__
+	/******/ 	__webpack_require__.p = "";
+	/******/
+	/******/ 	// Load entry module and return exports
+	/******/ 	return __webpack_require__(0);
+	/******/ })
+	/************************************************************************/
+	/******/ ([
+	/* 0 */
+	/***/ function(module, exports, __webpack_require__) {
+	
+		"use strict";
+		
+		Object.defineProperty(exports, "__esModule", {
+		  value: true
+		});
+		
+		var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+		
+		function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
+		
+		function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+		
+		var _event = __webpack_require__(1);
+		
+		var _event2 = _interopRequireDefault(_event);
+		
+		var _errorsNoEventsError = __webpack_require__(3);
+		
+		var _errorsNoEventsError2 = _interopRequireDefault(_errorsNoEventsError);
+		
+		var ICS = (function () {
+		  _createClass(ICS, null, [{
+		    key: "MIME_TYPE",
+		    value: "text/calendar",
+		    enumerable: true
+		  }, {
+		    key: "SEPARATOR",
+		    value: "\n",
+		    enumerable: true
+		  }, {
+		    key: "Event",
+		    value: _event2["default"],
+		    enumerable: true
+		  }]);
+		
+		  function ICS() {
+		    _classCallCheck(this, ICS);
+		
+		    this.events = [];
+		  }
+		
+		  _createClass(ICS, [{
+		    key: "addEvent",
+		    value: function addEvent(event) {
+		      if (!(event instanceof _event2["default"])) {
+		        throw new TypeError("Argument `event` must be an instance of ICSEvent.");
+		      } else if (!event.isValid()) {
+		        throw new InvalidEventError();
+		      }
+		
+		      this._events.push(event);
+		    }
+		  }, {
+		    key: "toString",
+		    value: function toString() {
+		      if (this.events.length < 1) throw new _errorsNoEventsError2["default"]();
+		
+		      var events = this.events.map(function (event) {
+		        return event.toString();
+		      });
+		
+		      return ["BEGIN:VCALENDAR", "VERSION:2.0", events.join(ICS.SEPARATOR), "END:VCALENDAR"].join(ICS.SEPARATOR);
+		    }
+		  }, {
+		    key: "toBlob",
+		    value: function toBlob() {
+		      return new Blob([this.toString()], { type: ICS.MIME_TYPE });
+		    }
+		  }, {
+		    key: "toBase64",
+		    value: function toBase64(callback) {
+		      var reader = new window.FileReader();
+		      reader.readAsDataURL(this.toBlob());
+		      reader.onloadend = function () {
+		        return callback(reader.result);
+		      };
+		    }
+		  }]);
+		
+		  return ICS;
+		})();
+		
+		exports["default"] = ICS;
+		module.exports = exports["default"];
+	
+	/***/ },
+	/* 1 */
+	/***/ function(module, exports, __webpack_require__) {
+	
+		"use strict";
+		
+		Object.defineProperty(exports, "__esModule", {
+		  value: true
+		});
+		
+		var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+		
+		function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
+		
+		function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+		
+		var _errorsInvalidEventError = __webpack_require__(2);
+		
+		var _errorsInvalidEventError2 = _interopRequireDefault(_errorsInvalidEventError);
+		
+		var Event = (function () {
+		  _createClass(Event, null, [{
+		    key: "SEPARATOR",
+		    value: "\n",
+		    enumerable: true
+		  }]);
+		
+		  function Event() {
+		    _classCallCheck(this, Event);
+		
+		    // Required props.
+		    this.subject = null;
+		    this.start = null;
+		    this.end = null;
+		
+		    // Optional props.
+		    this.description = null;
+		    this.location = null;
+		  }
+		
+		  _createClass(Event, [{
+		    key: "isValid",
+		    value: function isValid() {
+		      if (this.subject == undefined || this.start == undefined || this.end == undefined) {
+		        return false;
+		      }
+		    }
+		  }, {
+		    key: "toString",
+		    value: function toString() {
+		      if (!this.isValid()) throw new _errorsInvalidEventError2["default"]();
+		
+		      var optionals = [];
+		      if (this.description != undefined) optionals.push("DESCRIPTION:" + this.description);
+		      if (this.location != undefined) optionals.push("LOCATION:" + this.location);
+		
+		      return ["BEGIN:VEVENT", "CLASS:PUBLIC", "DTSTART;VALUE=DATE:" + ICSEvent.dateToICSFormat(this.start), "DTEND;VALUE=DATE:" + ICSEvent.dateToICSFormat(this.end), "SUMMARY;LANGUAGE=en-us:" + this.subject, optionals.join(Event.SEPARATOR), "TRANSP:TRANSPARENT", "END:VEVENT"].join(Event.SEPARATOR);
+		    }
+		  }], [{
+		    key: "dateToICSFormat",
+		    value: function dateToICSFormat(date) {
+		      if (!(date instanceof Date)) throw new TypeError("Argument `date` must be an instance of Date.");
+		
+		      var year = ("0000" + date.getFullYear().toString()).slice(-4);
+		      var month = ("00" + (date.getMonth() + 1).toString()).slice(-2);
+		      var day = ("00" + date.getDate().toString()).slice(-2);
+		      var hours = ("00" + date.getHours().toString()).slice(-2);
+		      var minutes = ("00" + date.getMinutes().toString()).slice(-2);
+		      var seconds = ("00" + date.getMinutes().toString()).slice(-2);
+		
+		      var time = "T" + hours + minutes + seconds;
+		
+		      return year + month + day + time;
+		    }
+		  }]);
+		
+		  return Event;
+		})();
+		
+		exports["default"] = Event;
+		module.exports = exports["default"];
+	
+	/***/ },
+	/* 2 */
+	/***/ function(module, exports) {
+	
+		"use strict";
+		
+		Object.defineProperty(exports, "__esModule", {
+		  value: true
+		});
+		exports["default"] = InvalidEventError;
+		
+		function InvalidEventError(message) {
+		  this.name = "InvalidEventError";
+		  this.message = message || "Event is not configured correctly.";
+		}
+		
+		InvalidEventError.prototype = Object.create(Error.prototype);
+		InvalidEventError.prototype.constructor = InvalidEventError;
+		module.exports = exports["default"];
+	
+	/***/ },
+	/* 3 */
+	/***/ function(module, exports) {
+	
+		"use strict";
+		
+		Object.defineProperty(exports, "__esModule", {
+		  value: true
+		});
+		exports["default"] = NoEventsError;
+		
+		function NoEventsError(message) {
+		  this.name = "NoEventsError";
+		  this.message = message || "No events added.";
+		}
+		
+		NoEventsError.prototype = Object.create(Error.prototype);
+		NoEventsError.prototype.constructor = NoEventsError;
+		module.exports = exports["default"];
+	
+	/***/ }
+	/******/ ]);
+	//# sourceMappingURL=ics.js.map
 
 /***/ },
 /* 3 */
