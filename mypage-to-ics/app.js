@@ -10,7 +10,7 @@ export default class App {
   validWindowLocation() {
     const l = window.location;
 
-    if (l.host = "mypage.apple.com" &&
+    if (l.host == "mypage.apple.com" &&
         (l.pathname == "/myPage/myTime.action" ||
          l.pathname == "/myPage/kronosSchedule.action")) {
       return true;
@@ -39,16 +39,17 @@ export default class App {
   execute() {
     if (!this.validWindowLocation()) {
       alert("Please run this script on the MyPage Schedule page.");
-    } else {
-      const scheduleContainer = $("#pane1 > table:nth-child(2) > tbody > tr:first > td:nth-child(2)");
-      const header = scheduleContainer.find("table:first > tbody > tr:nth-child(2) > td:first");
-      const shifts = scheduleContainer.find("table:nth-child(2) > tbody > tr:not(.disable)");
-
-      this.baseDate = header.text().slice(15).trim();
-
-      shifts.each((_, element) => this.createEventFromElement(element));
-
-      this.ics.toBase64((result) => window.location = result);
+      return;
     }
+
+    const scheduleContainer = $("#pane1 > table:nth-child(2) > tbody > tr:first > td:nth-child(2)");
+    const header = scheduleContainer.find("table:first > tbody > tr:nth-child(2) > td:first");
+    const shifts = scheduleContainer.find("table:nth-child(2) > tbody > tr:not(.disable)");
+
+    this.baseDate = header.text().slice(15).trim();
+
+    shifts.each((_, element) => this.createEventFromElement(element));
+
+    this.ics.toBase64((result) => window.location = result);
   }
 }
