@@ -1,3 +1,5 @@
+import moment from 'moment';
+
 export default class Shift {
   static momentFormat = "MMM D, YYYY h:mmA";
 
