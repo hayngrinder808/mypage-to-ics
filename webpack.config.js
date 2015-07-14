@@ -7,7 +7,7 @@ module.exports = {
 
   output: {
     path: __dirname,
-    filename: "mypage-to-ics.min.js"
+    filename: "mypage-to-ics.js"
   },
 
   resolve: {
