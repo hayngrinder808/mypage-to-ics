@@ -83,6 +83,7 @@
 	  function App() {
 	    _classCallCheck(this, App);
 	
+	    console.log(_icsJs2['default']);
 	    this.ics = new _icsJs2['default']();
 	    this.baseDate = null;
 	  }
