@@ -83,7 +83,6 @@
 	  function App() {
 	    _classCallCheck(this, App);
 	
-	    console.log(__webpack_require__(2));
 	    this.ics = new _icsJs2['default']();
 	    this.baseDate = null;
 	  }

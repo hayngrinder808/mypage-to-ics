@@ -3,7 +3,6 @@ import Shift from 'shift';
 
 export default class App {
   constructor() {
-    console.log(require("ics-js"))
     this.ics = new ICS();
     this.baseDate = null;
   }
