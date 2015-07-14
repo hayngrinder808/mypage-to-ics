@@ -37,7 +37,7 @@ export default class App {
   }
 
   execute() {
-    if (!validWindowLocation()) {
+    if (!this.validWindowLocation()) {
       alert("Please run this script on the MyPage Schedule page.");
       return false;
     }
