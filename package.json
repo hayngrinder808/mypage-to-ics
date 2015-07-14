@@ -2,7 +2,7 @@
   "name": "mypage-to-ics",
   "version": "0.1.0",
   "description": "Import a MyPage schedule to your calendar via ICS",
-  "main": "mypage-to-ics.min.js",
+  "main": "mypage-to-ics.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "webpack"
@@ -23,7 +23,7 @@
   },
   "homepage": "https://github.com/angeloashmore/mypage-to-ics#readme",
   "dependencies": {
-    "ics-js": "^0.1.0",
+    "ics-js": "^0.1.1",
     "moment": "^2.10.3"
   },
   "devDependencies": {
