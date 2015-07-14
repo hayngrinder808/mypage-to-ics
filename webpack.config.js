@@ -1,6 +1,8 @@
 var webpack = require("webpack");
 
 module.exports = {
+  devtool: 'sourcemap',
+
   entry: "./mypage-to-ics/index.js",
 
   output: {
