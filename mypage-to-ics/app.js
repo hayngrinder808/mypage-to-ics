@@ -1,18 +1,7 @@
-// JavaScript dependencies
-const dependencies = {
-  "moment": "https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.3/moment.min.js",
-  "ics": "https://cdn.rawgit.com/angeloashmore/ics-js/master/ics.es5.min.js"
-};
+import ICS from 'ics-js';
+import Shift from 'shift';
 
-// Load dependencies and run app();
-$.getScript(dependencies["moment"], () => {
-  $.getScript(dependencies["ics"], () => {
-    const app = new App();
-    app.execute();
-  });
-});
-
-class App {
+export default class App {
   constructor() {
     this.ics = new ICS();
     this.baseDate = null;
@@ -25,7 +14,7 @@ class App {
 
     const shift = new Shift(this.baseDate, dayOfWeek, startTime, endTime);
 
-    const event = new ICSEvent();
+    const event = new ICS.Event();
     event.subject = `You work at ${startTime}`;
     event.description = "";
     event.location = "Apple Store Ala Moana";
@@ -45,27 +34,5 @@ class App {
     shifts.each((_, element) => this.createEventFromElement(element));
 
     this.ics.toBase64((result) => window.location = result);
-  }
-}
-
-class Shift {
-  static momentFormat = "MMM D, YYYY h:mmA";
-
-  static weekdays = function() {
-    const weekdays = moment.weekdays();
-    weekdays.unshift(weekdays.pop());
-    return weekdays;
-  }
-
-  constructor(date, dayOfWeek, startTime, endTime) {
-    const start = moment(`${date} ${startTime}`, Shift.momentFormat);
-    start.add(Shift.weekdays().indexOf(dayOfWeek), "days");
-
-    const end = moment(`${date} ${endTime}`, Shift.momentFormat);
-    end.add(Shift.weekdays().indexOf(dayOfWeek), "days");
-    if (end.isBefore(start)) end.add(1, "days");
-
-    this.start = start.toDate();
-    this.end = end.toDate();
   }
 }
