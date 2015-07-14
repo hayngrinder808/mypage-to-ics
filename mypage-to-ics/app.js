@@ -7,6 +7,18 @@ export default class App {
     this.baseDate = null;
   }
 
+  validWindowLocation() {
+    const l = window.location;
+
+    if (l.host = "mypage.apple.com" &&
+        (l.pathname == "/myPage/myTime.action" ||
+         l.pathname == "/myPage/kronosSchedule.action")) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
   createEventFromElement(element) {
     const dayOfWeek = $(element).children("td.day:first").text().trim();
     const startTime = $(element).children("td.time:first").text().trim();
@@ -25,6 +37,11 @@ export default class App {
   }
 
   execute() {
+    if (!validWindowLocation()) {
+      alert("Please run this script on the MyPage Schedule page.");
+      return false;
+    }
+
     const scheduleContainer = $("#pane1 > table:nth-child(2) > tbody > tr:first > td:nth-child(2)");
     const header = scheduleContainer.find("table:first > tbody > tr:nth-child(2) > td:first");
     const shifts = scheduleContainer.find("table:nth-child(2) > tbody > tr:not(.disable)");
