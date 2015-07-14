@@ -20,5 +20,12 @@ module.exports = {
       { test: /\.js$/, exclude: /node_modules/, loader: "babel-loader?stage=0"},
       { test: /node_modules\/ics-js\/.*\.js$/, loader: "babel-loader?stage=0"}
     ]
-  }
+  },
+
+  plugins: [
+    new webpack.optimize.UglifyJsPlugin({
+      compress: true,
+      mangle: true
+    })
+  ]
 };
