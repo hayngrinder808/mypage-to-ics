@@ -19,12 +19,5 @@ module.exports = {
     loaders: [
       { test: /\.js$/, exclude: /node_modules/, loader: "babel-loader?stage=0"}
     ]
-  },
-
-  plugins: [
-    new webpack.optimize.UglifyJsPlugin({
-      compress: true,
-      mangle: true
-    })
-  ]
+  }
 };
