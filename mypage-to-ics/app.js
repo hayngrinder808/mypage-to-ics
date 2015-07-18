@@ -26,7 +26,7 @@ export default class App {
 
     const shift = new Shift(this.baseDate, dayOfWeek, startTime, endTime);
 
-    const event = new ICS.component.VEVENT();
+    const event = new ICS.components.VEVENT();
     event.addProp(new ICS.Property("SUBJECT", `You work at ${startTime}`));
     event.addProp(new ICS.Property("LOCATION", `Apple Store`));
     event.addProp(new ICS.Property("DTSTART", shift.start));
