@@ -3,7 +3,7 @@ import Shift from 'shift';
 
 export default class App {
   constructor() {
-    this.ics = new ICS();
+    this.cal = new ICS.components.VCALENDAR();
     this.baseDate = null;
   }
 
@@ -26,14 +26,13 @@ export default class App {
 
     const shift = new Shift(this.baseDate, dayOfWeek, startTime, endTime);
 
-    const event = new ICS.Event();
-    event.subject = `You work at ${startTime}`;
-    event.description = "";
-    event.location = "Apple Store Ala Moana";
-    event.start = shift.start;
-    event.end = shift.end;
+    const event = new ICS.component.VEVENT();
+    event.addProp(new ICS.Property("SUBJECT", `You work at ${startTime}`));
+    event.addProp(new ICS.Property("LOCATION", `Apple Store`));
+    event.addProp(new ICS.Property("DTSTART", shift.start));
+    event.addProp(new ICS.Property("DTEND", shift.end));
 
-    this.ics.addEvent(event)
+    this.cal.addComponent(event);
   }
 
   execute() {
@@ -50,6 +49,7 @@ export default class App {
 
     shifts.each((_, element) => this.createEventFromElement(element));
 
-    this.ics.toBase64((result) => window.location = result);
+    ICS.toBase64(this.cal.toString())
+      .then(result => window.location = result);
   }
 }
