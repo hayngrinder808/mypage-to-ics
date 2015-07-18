@@ -27,10 +27,10 @@ export default class App {
     const shift = new Shift(this.baseDate, dayOfWeek, startTime, endTime);
 
     const event = new ICS.components.VEVENT();
-    event.addProp(new ICS.Property("SUBJECT", `You work at ${startTime}`));
-    event.addProp(new ICS.Property("LOCATION", `Apple Store`));
-    event.addProp(new ICS.Property("DTSTART", shift.start));
-    event.addProp(new ICS.Property("DTEND", shift.end));
+    event.addProp(new ICS.properties.SUMMARY(`You work at ${startTime}`));
+    event.addProp(new ICS.properties.LOCATION("Apple Store"));
+    event.addProp(new ICS.properties.DTSTART(shift.start));
+    event.addProp(new ICS.properties.DTEND(shift.end));
 
     this.cal.addComponent(event);
   }
