@@ -47,7 +47,7 @@ export default class App {
     const shift = new Shift(baseDate, day, start, end);
 
     const event = new ICS.components.VEVENT();
-    event.addProp(new ICS.properties.UID(shift.start.getTime()));
+    event.addProp(new ICS.properties.UID());
     event.addProp(new ICS.properties.DTSTAMP(new Date(Date.now())));
     event.addProp(new ICS.properties.SUMMARY(`You work ${start}–${end}`));
     event.addProp(new ICS.properties.LOCATION("Apple Store"));
@@ -65,7 +65,7 @@ export default class App {
     alarm_12h.addProp(new ICS.properties.DESCRIPTION("Event reminder"));
 
     const todo = new ICS.components.VTODO();
-    todo.addProp(new ICS.properties.UID(shift.start.getTime()));
+    todo.addProp(new ICS.properties.UID());
     todo.addProp(new ICS.properties.DTSTAMP(shift.start));
     todo.addProp(new ICS.properties.DUE(shift.end));
     todo.addProp(new ICS.properties.SUMMARY(`Clock out for ${start}–${end} shift`));
