@@ -48,7 +48,7 @@ export default class App {
 
     const event = new ICS.components.VEVENT();
     event.addProp(new ICS.properties.UID(Date.now()));
-    event.addProp(new ICS.properties.DTSTAMP(Date.now()));
+    event.addProp(new ICS.properties.DTSTAMP(Date.new(Date.now())));
     event.addProp(new ICS.properties.SUMMARY(`You work ${start}–${end}`));
     event.addProp(new ICS.properties.LOCATION("Apple Store"));
     event.addProp(new ICS.properties.DTSTART(shift.start));
