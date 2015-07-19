@@ -3,7 +3,10 @@ var webpack = require("webpack");
 module.exports = {
   devtool: 'sourcemap',
 
-  entry: "./mypage-to-ics/index.js",
+  entry: [
+    __dirname + "/node_modules/babel-core/browser-polyfill.js",
+    "./mypage-to-ics/index.js",
+  ],
 
   output: {
     path: __dirname,
@@ -19,6 +22,9 @@ module.exports = {
     loaders: [
       { test: /\.js$/, exclude: /node_modules/, loader: "babel-loader?stage=0"},
       { test: /node_modules\/ics-js\/.*\.js$/, loader: "babel-loader?stage=0"}
+    ],
+    noParse: [
+      /\/babel-core\/browser-polyfill\.js$/
     ]
   },
 
