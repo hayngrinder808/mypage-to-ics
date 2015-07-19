@@ -4,10 +4,10 @@ export default class Shift {
   constructor(date, day, startTime, endTime) {
     const daysToAdd = Shift.days.indexOf(day);
 
-    const startDate = new Date(`${date} ${Shift.timeFormatter(startTime)}`);
+    const startDate = new Date(`${date} ${Shift._timeFormatter(startTime)}`);
     let start = Shift._addDays(startDate, daysToAdd);
 
-    const endDate = new Date(`${date} ${Shift.timeFormatter(endTime)}`);
+    const endDate = new Date(`${date} ${Shift._timeFormatter(endTime)}`);
     let end = Shift._addDays(endDate, daysToAdd);
 
     if (end < start) end = Shift._addDays(end, 1);
