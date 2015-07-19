@@ -8,7 +8,7 @@ export default class App {
       baseDate: null
     };
 
-    setupCal();
+    this.setupCal();
   }
 
   setupCal() {
