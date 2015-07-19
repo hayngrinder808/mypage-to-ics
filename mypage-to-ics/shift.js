@@ -1,23 +1,27 @@
-import moment from 'moment';
+import days from 'days';
+import dateMath from 'date-arithmetic';
 
 export default class Shift {
-  static momentFormat = "MMM D, YYYY h:mmA";
-
-  static weekdays = function() {
-    const weekdays = moment.weekdays();
-    weekdays.unshift(weekdays.pop());
-    return weekdays;
+  static _days = function() {
+    return days.unshift(days.pop());
   }
 
   constructor(date, dayOfWeek, startTime, endTime) {
-    const start = moment(`${date} ${startTime}`, Shift.momentFormat);
-    start.add(Shift.weekdays().indexOf(dayOfWeek), "days");
+    const daysToAdd = Shift._days().indexOf(dayOfWeek);
 
-    const end = moment(`${date} ${endTime}`, Shift.momentFormat);
-    end.add(Shift.weekdays().indexOf(dayOfWeek), "days");
-    if (end.isBefore(start)) end.add(1, "days");
+    const startDate = new Date(`${date} ${Shift.timeFormatter(startTime)}`);
+    const start = dateMath.add(startDate, daysToAdd, "day");
 
-    this.start = start.toDate();
-    this.end = end.toDate();
+    const endDate = new Date(`${date} ${Shift.timeFormatter(endTime)}`);
+    let end = dateMath(endDate, daysToAdd, "day");
+
+    if (end < start) end = dateMath.add(end, 1, "day");
+
+    this.start = start;
+    this.end = end;
+  }
+
+  static _timeFormatter(time) {
+    return `${time.slice(0, -2)} ${time.slice(-2)}`;
   }
 }

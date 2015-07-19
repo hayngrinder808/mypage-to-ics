@@ -4,39 +4,47 @@ import Shift from 'shift';
 export default class App {
   constructor() {
     this.state = {
-      cal: null,
-      baseDate: null
+      calendar: this.createCalendar()
     };
-
-    this.setupCal();
   }
 
-  setupCal() {
+  createCalendar() {
     const cal = new ICS.components.VCALENDAR();
     cal.addProp(new ICS.properties.VERSION(2));
     cal.addProp(new ICS.properties.PRODID("Angelo Ashmore"));
-
-    this.state.cal = cal;
+    return cal;
   }
 
-  validWindowLocation() {
-    const l = window.location;
+  execute() {
+    try {
+      const { calendar } = this.state;
 
-    if (l.host == "mypage.apple.com" &&
-        (l.pathname == "/myPage/myTime.action" ||
-         l.pathname == "/myPage/kronosSchedule.action")) {
-      return true;
-    } else {
-      return false;
+      App.validateLocation();
+
+      const shifts = App.getShifts();
+      shifts.each((_, element) => this.addEventFromElement(element));
+
+      ICS.toBase64(calendar.toString())
+        .then(result => window.location = result);
+
+    } catch (e) {
+      console.error(e);
+
+      if (e instanceof URIError) {
+        alert("Please run this script on MyPage Schedule.");
+        return;
+      }
+
+      alert("An error occured while parsing your schedule.");
     }
   }
 
-  createEventFromElement(element) {
-    const dayOfWeek = $(element).children("td.day:first").text().trim();
-    const startTime = $(element).children("td.time:first").text().trim();
-    const endTime = $(element).children("td.time:nth-child(5)").text().trim();
+  addEventFromElement(element) {
+    const { calendar } = this.state;
 
-    const shift = new Shift(this.baseDate, dayOfWeek, startTime, endTime);
+    const baseDate = App.getBaseDate();
+    const { day, start, end } = extractShiftData(element);
+    const shift = new Shift(baseDate, day, start, end);
 
     const event = new ICS.components.VEVENT();
     event.addProp(new ICS.properties.UID(Date.now()));
@@ -46,24 +54,37 @@ export default class App {
     event.addProp(new ICS.properties.DTSTART(shift.start));
     event.addProp(new ICS.properties.DTEND(shift.end));
 
-    this.state.cal.addComponent(event);
+    calendar.addComponent(event);
   }
 
-  execute() {
-    if (!this.validWindowLocation()) {
-      alert("Please run this script on the MyPage Schedule page.");
-      return;
+  static validateLocation() {
+    const { host, pathname } = window.location;
+    if (host != "mypage.apple.com" &&
+        (pathname != "/myPage/myTime.action" ||
+         pathname != "/myPage/kronosSchedule.action")) {
+      throw new URIError("Not on MyPage Schedule");
     }
+  }
 
-    const scheduleContainer = $("#pane1 > table:nth-child(2) > tbody > tr:first > td:nth-child(2)");
-    const header = scheduleContainer.find("table:first > tbody > tr:nth-child(2) > td:first");
-    const shifts = scheduleContainer.find("table:nth-child(2) > tbody > tr:not(.disable)");
+  static getScheduleContainer() {
+    return $("#pane1 > table:nth-child(2) > tbody > tr:first > td:nth-child(2)");
+  }
 
-    this.state.baseDate = header.text().slice(15).trim();
+  static getShifts() {
+    const query = "table:nth-child(2) > tbody > tr:not(.disable)";
+    return App.getScheduleContainer().find(query);
+  }
 
-    shifts.each((_, element) => this.createEventFromElement(element));
+  static getBaseDate() {
+    const query = "table:first > tbody > tr:nth-child(2) > td:first";
+    const header = App.getScheduleContainer().find(query);
+    return header.text().slice(15).trim();
+  }
 
-    ICS.toBase64(this.state.cal.toString())
-      .then(result => window.location = result);
+  static extractShiftData(element) {
+    const day = $(element).children("td.day:first").text().trim();
+    const start = $(element).children("td.time:first").text().trim();
+    const end = $(element).children("td.time:nth-child(5)").text().trim();
+    return { day, start, end };
   }
 }
