@@ -13,8 +13,8 @@ export default class App {
 
   setupCal() {
     const cal = new ICS.components.VCALENDAR();
-    cal.addProp(new ICS.property.VERSION(2));
-    cal.addProp(new ICS.property.PRODID("Angelo Ashmore"));
+    cal.addProp(new ICS.properties.VERSION(2));
+    cal.addProp(new ICS.properties.PRODID("Angelo Ashmore"));
 
     this.state.cal = cal;
   }
