@@ -3,8 +3,20 @@ import Shift from 'shift';
 
 export default class App {
   constructor() {
-    this.cal = new ICS.components.VCALENDAR();
-    this.baseDate = null;
+    this.state = {
+      cal: null,
+      baseDate: null
+    };
+
+    setupCal();
+  }
+
+  setupCal() {
+    const cal = new ICS.components.VCALEDNAR();
+    cal.addProp(new ICS.property.VERSION(2));
+    cal.addProp(new ICS.property.PRODID("Angelo Ashmore"));
+
+    this.state.cal = cal;
   }
 
   validWindowLocation() {
@@ -27,12 +39,14 @@ export default class App {
     const shift = new Shift(this.baseDate, dayOfWeek, startTime, endTime);
 
     const event = new ICS.components.VEVENT();
+    event.addProp(new ICS.properties.UID(Date.now()));
+    event.addProp(new ICS.properties.DTSTAMP(Date.now()));
     event.addProp(new ICS.properties.SUMMARY(`You work at ${startTime}`));
     event.addProp(new ICS.properties.LOCATION("Apple Store"));
     event.addProp(new ICS.properties.DTSTART(shift.start));
     event.addProp(new ICS.properties.DTEND(shift.end));
 
-    this.cal.addComponent(event);
+    this.state.cal.addComponent(event);
   }
 
   execute() {
@@ -45,11 +59,11 @@ export default class App {
     const header = scheduleContainer.find("table:first > tbody > tr:nth-child(2) > td:first");
     const shifts = scheduleContainer.find("table:nth-child(2) > tbody > tr:not(.disable)");
 
-    this.baseDate = header.text().slice(15).trim();
+    this.state.baseDate = header.text().slice(15).trim();
 
     shifts.each((_, element) => this.createEventFromElement(element));
 
-    ICS.toBase64(this.cal.toString())
+    ICS.toBase64(this.state.cal.toString())
       .then(result => window.location = result);
   }
 }
