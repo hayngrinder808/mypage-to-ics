@@ -76,7 +76,7 @@ export default class App {
     alarm_todo.addProp(new ICS.properties.TRIGGER("-PT5M"));
     alarm_todo.addProp(new ICS.properties.DESCRIPTION("To do reminder"));
 
-    todo.addComponent(alaram_todo);
+    todo.addComponent(alarm_todo);
     event.addComponent(alarm_1d);
     event.addComponent(alarm_12h);
     calendar.addComponent(event);
