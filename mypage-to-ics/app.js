@@ -54,6 +54,18 @@ export default class App {
     event.addProp(new ICS.properties.DTSTART(shift.start));
     event.addProp(new ICS.properties.DTEND(shift.end));
 
+    const alarm_1d = new ICS.components.VALARM();
+    alarm_1d.addProp(new ICS.properties.ACTION("DISPLAY"));
+    alarm_1d.addProp(new ICS.properties.TRIGGER("-P1D"));
+    alarm_1d.addProp(new ICS.properties.DESCRIPTION("Event reminder"));
+
+    const alarm_12h = new ICS.components.VALARM();
+    alarm_12h.addProp(new ICS.properties.ACTION("DISPLAY"));
+    alarm_12h.addProp(new ICS.properties.TRIGGER("-PT12H"));
+    alarm_12h.addProp(new ICS.properties.DESCRIPTION("Event reminder"));
+
+    event.addComponent(alarm_1d);
+    event.addComponent(alarm_12h);
     calendar.addComponent(event);
   }
 
