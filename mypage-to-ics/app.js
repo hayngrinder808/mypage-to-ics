@@ -12,7 +12,7 @@ export default class App {
   }
 
   setupCal() {
-    const cal = new ICS.components.VCALEDNAR();
+    const cal = new ICS.components.VCALENDAR();
     cal.addProp(new ICS.property.VERSION(2));
     cal.addProp(new ICS.property.PRODID("Angelo Ashmore"));
 
