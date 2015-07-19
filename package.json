@@ -23,10 +23,7 @@
   },
   "homepage": "https://github.com/angeloashmore/mypage-to-ics#readme",
   "dependencies": {
-    "date-arithmetic": "^3.0.0",
-    "days": "^1.0.1",
-    "ics-js": "^0.6.0",
-    "moment": "^2.10.3"
+    "ics-js": "^0.6.0"
   },
   "devDependencies": {
     "babel-core": "^5.6.20",

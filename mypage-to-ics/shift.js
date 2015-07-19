@@ -1,21 +1,16 @@
-import days from 'days';
-import dateMath from 'date-arithmetic';
-
 export default class Shift {
-  static _days = function() {
-    return days.unshift(days.pop());
-  }
+  static days = ["Saturday", "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday"];
 
-  constructor(date, dayOfWeek, startTime, endTime) {
-    const daysToAdd = Shift._days().indexOf(dayOfWeek);
+  constructor(date, day, startTime, endTime) {
+    const daysToAdd = Shift.days.indexOf(day);
 
     const startDate = new Date(`${date} ${Shift.timeFormatter(startTime)}`);
-    const start = dateMath.add(startDate, daysToAdd, "day");
+    let start = Shift._addDays(startDate, daysToAdd);
 
     const endDate = new Date(`${date} ${Shift.timeFormatter(endTime)}`);
-    let end = dateMath(endDate, daysToAdd, "day");
+    let end = Shift._addDays(endDate, daysToAdd);
 
-    if (end < start) end = dateMath.add(end, 1, "day");
+    if (end < start) end = Shift._addDays(end, 1);
 
     this.start = start;
     this.end = end;
@@ -23,5 +18,9 @@ export default class Shift {
 
   static _timeFormatter(time) {
     return `${time.slice(0, -2)} ${time.slice(-2)}`;
+  }
+
+  static _addDays(date, qty) {
+    return new Date(date.getTime() + qty * 86400000);
   }
 }
