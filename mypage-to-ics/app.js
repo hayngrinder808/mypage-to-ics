@@ -1,5 +1,5 @@
 import ICS from 'ics-js';
-import Shift from 'shift';
+import Shift from './shift';
 
 export default class App {
   constructor() {
