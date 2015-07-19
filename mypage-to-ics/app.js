@@ -43,7 +43,7 @@ export default class App {
     const { calendar } = this.state;
 
     const baseDate = App.getBaseDate();
-    const { day, start, end } = extractShiftData(element);
+    const { day, start, end } = App.extractShiftData(element);
     const shift = new Shift(baseDate, day, start, end);
 
     const event = new ICS.components.VEVENT();
