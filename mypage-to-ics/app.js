@@ -72,9 +72,9 @@ export default class App {
     todo.addProp(new ICS.properties.CATEGORIES("WORK"));
 
     const alarm_todo = new ICS.components.VALARM();
-    todo.addProp(new ICS.properties.ACTION("DISPLAY"));
-    todo.addProp(new ICS.properties.TRIGGER("-PT5M"));
-    todo.addProp(new ICS.properties.DESCRIPTION("To do reminder"));
+    alarm_todo.addProp(new ICS.properties.ACTION("DISPLAY"));
+    alarm_todo.addProp(new ICS.properties.TRIGGER("-PT5M"));
+    alarm_todo.addProp(new ICS.properties.DESCRIPTION("To do reminder"));
 
     todo.addComponent(alaram_todo);
     event.addComponent(alarm_1d);
