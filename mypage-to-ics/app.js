@@ -47,7 +47,7 @@ export default class App {
     const shift = new Shift(baseDate, day, start, end);
 
     const event = new ICS.components.VEVENT();
-    event.addProp(new ICS.properties.UID(Date.now()));
+    event.addProp(new ICS.properties.UID(shift.start.getTime()));
     event.addProp(new ICS.properties.DTSTAMP(new Date(Date.now())));
     event.addProp(new ICS.properties.SUMMARY(`You work ${start}–${end}`));
     event.addProp(new ICS.properties.LOCATION("Apple Store"));
@@ -64,6 +64,19 @@ export default class App {
     alarm_12h.addProp(new ICS.properties.TRIGGER("-PT12H"));
     alarm_12h.addProp(new ICS.properties.DESCRIPTION("Event reminder"));
 
+    const todo = new ICS.components.VTODO();
+    todo.addProp(new ICS.properties.UID(shift.start.getTime()));
+    todo.addProp(new ICS.properties.DTSTAMP(shift.start));
+    todo.addProp(new ICS.properties.DUE(shift.end));
+    todo.addProp(new ICS.properties.SUMMARY(`Clock out for ${start}–${end} shift`));
+    todo.addProp(new ICS.properties.CATEGORIES("WORK"));
+
+    const alarm_todo = new ICS.components.VALARM();
+    todo.addProp(new ICS.properties.ACTION("DISPLAY"));
+    todo.addProp(new ICS.properties.TRIGGER("-PT5M"));
+    todo.addProp(new ICS.properties.DESCRIPTION("To do reminder"));
+
+    todo.addComponent(alaram_todo);
     event.addComponent(alarm_1d);
     event.addComponent(alarm_12h);
     calendar.addComponent(event);
