@@ -1,5 +1,5 @@
 # mypage-to-ics
-Import a MyPage schedule to your calendar via ICS.
+Import an Apple MyPage schedule to your calendar via ICS.
 
 ## Installation
 
