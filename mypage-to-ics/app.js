@@ -9,9 +9,9 @@ export default class App {
   }
 
   createCalendar() {
-    const cal = new ICS.components.VCALENDAR();
-    cal.addProp(new ICS.properties.VERSION(2));
-    cal.addProp(new ICS.properties.PRODID("Angelo Ashmore"));
+    const cal = new ICS.VCALENDAR();
+    cal.addProp("VERSION", 2);
+    cal.addProp("PRODID", "Angelo Ashmore");
     return cal;
   }
 
@@ -46,35 +46,35 @@ export default class App {
     const { day, start, end } = App.extractShiftData(element);
     const shift = new Shift(baseDate, day, start, end);
 
-    const event = new ICS.components.VEVENT();
-    event.addProp(new ICS.properties.UID());
-    event.addProp(new ICS.properties.DTSTAMP(new Date(Date.now())));
-    event.addProp(new ICS.properties.SUMMARY(`You work ${start}–${end}`));
-    event.addProp(new ICS.properties.LOCATION("Apple Store"));
-    event.addProp(new ICS.properties.DTSTART(shift.start));
-    event.addProp(new ICS.properties.DTEND(shift.end));
+    const event = new ICS.VEVENT();
+    event.addProp("UID");
+    event.addProp("DTSTAMP", new Date(Date.now()));
+    event.addProp("SUMMARY", `You work ${start}–${end}`);
+    event.addProp("LOCATION", "Apple Store");
+    event.addProp("DTSTART", shift.start);
+    event.addProp("DTEND", shift.end);
 
-    const alarm_1d = new ICS.components.VALARM();
-    alarm_1d.addProp(new ICS.properties.ACTION("DISPLAY"));
-    alarm_1d.addProp(new ICS.properties.TRIGGER("-P1D"));
-    alarm_1d.addProp(new ICS.properties.DESCRIPTION("Event reminder"));
+    const alarm_1d = new ICS.VALARM();
+    alarm_1d.addProp("ACTION", "DISPLAY");
+    alarm_1d.addProp("TRIGGER", "-P1D");
+    alarm_1d.addProp("DESCRIPTION", "Event reminder");
 
-    const alarm_12h = new ICS.components.VALARM();
-    alarm_12h.addProp(new ICS.properties.ACTION("DISPLAY"));
-    alarm_12h.addProp(new ICS.properties.TRIGGER("-PT12H"));
-    alarm_12h.addProp(new ICS.properties.DESCRIPTION("Event reminder"));
+    const alarm_12h = new ICS.VALARM();
+    alarm_12h.addProp("ACTION", "DISPLAY");
+    alarm_12h.addProp("TRIGGER", "-PT12H");
+    alarm_12h.addProp("DESCRIPTION", "Event reminder");
 
-    const todo = new ICS.components.VTODO();
-    todo.addProp(new ICS.properties.UID());
-    todo.addProp(new ICS.properties.DTSTAMP(shift.start));
-    todo.addProp(new ICS.properties.DUE(shift.end));
-    todo.addProp(new ICS.properties.SUMMARY(`Clock out for ${start}–${end} shift`));
-    todo.addProp(new ICS.properties.CATEGORIES("WORK"));
+    const todo = new ICS.VTODO();
+    todo.addProp("UID");
+    todo.addProp("DTSTAMP", shift.start);
+    todo.addProp("DUE", shift.end);
+    todo.addProp("SUMMARY", `Clock out for ${start}–${end} shift`);
+    todo.addProp("CATEGORIES", "WORK");
 
-    const alarm_todo = new ICS.components.VALARM();
-    alarm_todo.addProp(new ICS.properties.ACTION("DISPLAY"));
-    alarm_todo.addProp(new ICS.properties.TRIGGER("-PT5M"));
-    alarm_todo.addProp(new ICS.properties.DESCRIPTION("To do reminder"));
+    const alarm_todo = new ICS.VALARM();
+    alarm_todo.addProp("ACTION", "DISPLAY");
+    alarm_todo.addProp("TRIGGER", "-PT5M");
+    alarm_todo.addProp("DESCRIPTION", "To do reminder");
 
     event.addComponent(alarm_1d);
     event.addComponent(alarm_12h);
