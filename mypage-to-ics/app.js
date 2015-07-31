@@ -24,7 +24,7 @@ export default class App {
       const shifts = App.getShifts();
       shifts.each((_, element) => this.addEventFromElement(element));
 
-      ICS.toBase64(calendar.toString())
+      calendar.toBase64()
         .then(result => window.location = result);
 
     } catch (e) {
