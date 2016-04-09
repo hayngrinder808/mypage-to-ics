@@ -1,36 +1,36 @@
-var webpack = require("webpack");
+var webpack = require('webpack');
 
 module.exports = {
-  devtool: 'sourcemap',
-
-  entry: [
-    __dirname + "/node_modules/babel-core/browser-polyfill.js",
-    "./mypage-to-ics/index.js",
-  ],
+  entry : './src/index.js',
 
   output: {
-    path: __dirname,
-    filename: "mypage-to-ics.js"
+    path: 'dist',
+    filename: 'mypage-to-ics.js'
   },
 
   resolve: {
-    modulesDirectories: ["node_modules"],
-    extensions: ["", ".js"]
+    modulesDirectories: ['node_modules', './src'],
+    extensions: ['', '.js']
   },
 
   module: {
     loaders: [
-      { test: /\.js$/, exclude: /node_modules/, loader: "babel-loader?stage=0"},
-      { test: /node_modules\/ics-js\/.*\.js$/, loader: "babel-loader?stage=0"}
-    ],
-    noParse: [
-      /\/babel-core\/browser-polyfill\.js$/
+      {
+        test: /\.js$/,
+        loader: 'babel'
+      }
     ]
   },
 
   plugins: [
     new webpack.optimize.UglifyJsPlugin({
-      compress: true
+      compress: {
+        warnings: false
+      },
+      mangle: true,
+      output: {
+        comments: false
+      }
     })
   ]
 };
