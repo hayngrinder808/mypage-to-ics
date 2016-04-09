@@ -1,11 +1,11 @@
-import ICS from 'ics-js'
+import { VCALENDAR } from 'ics-js'
 import { CALENDAR } from 'constants'
 import { buildEvent, getShifts, validateLocation } from 'actions'
 
 try {
   validateLocation()
 
-  const calendar = new ICS.VCALENDAR()
+  const calendar = new VCALENDAR()
 
   calendar.addProp('VERSION', CALENDAR.VERSION)
   calendar.addProp('PRODID', CALENDAR.PRODID)

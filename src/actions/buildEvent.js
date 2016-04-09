@@ -1,4 +1,4 @@
-import ICS from 'ics-js'
+import { VEVENT } from 'ics-js'
 import { EVENT } from 'constants'
 import { buildAlarm } from 'actions'
 
@@ -6,7 +6,7 @@ const dtstamp = new Date(Date.now())
 
 export default (shift) => {
   const {end, endTimeRaw, start, startTimeRaw} = shift
-  const event = new ICS.VEVENT()
+  const event = new VEVENT()
 
   event.addProp('UID')
   event.addProp('DTSTAMP', dtstamp)

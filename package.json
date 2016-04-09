@@ -36,6 +36,12 @@
     "standard": "^6.0.8",
     "webpack": "^1.12.14"
   },
+  "babel": {
+    "presets": [
+      "es2015",
+      "stage-0"
+    ]
+  },
   "standard": {
     "ignore": [
       "/dist/",
