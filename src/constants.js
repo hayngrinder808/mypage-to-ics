@@ -1,16 +1,16 @@
 export const ALARM = {
   ACTION: 'DISPLAY',
   DESCRIPTION: 'Event reminder'
-};
+}
 
 export const CALENDAR = {
   PRODID: 'Angelo Ashmore',
   VERSION: 2
-};
+}
 
 export const EVENT = {
   LOCATION: 'Apple Store'
-};
+}
 
 export const QUERIES = {
   DESKTOP: {
@@ -29,4 +29,4 @@ export const QUERIES = {
     SHIFT_END: 'td.time:last-child',
     SHIFT_START: 'td.time'
   }
-};
+}

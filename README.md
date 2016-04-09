@@ -1,5 +1,7 @@
 # mypage-to-ics
 
+[![js-standard-style](https://img.shields.io/badge/code%20style-standard-brightgreen?style=flat-squared.svg)](http://standardjs.com/)
+
 Import an Apple MyPage schedule to your calendar.
 
 This script generates and downloads an ICS file locally. **No privacy issues!**

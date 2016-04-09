@@ -1,3 +1,3 @@
 export default () => {
-  return navigator.userAgent.match(/mobile/i);
-};
+  return navigator.userAgent.match(/mobile/i)
+}
