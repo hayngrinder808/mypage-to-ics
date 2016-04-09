@@ -4,7 +4,6 @@ import Shift from 'shift';
 
 export default () => {
   const queries = QUERIES[isMobile() ? 'MOBILE' : 'DESKTOP'];
-  console.log(isMobile(), queries);
 
   const containerNode = document.querySelector(queries.CONTAINER);
 
