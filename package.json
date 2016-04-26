@@ -23,9 +23,6 @@
     "url": "https://github.com/angeloashmore/mypage-to-ics/issues"
   },
   "homepage": "https://github.com/angeloashmore/mypage-to-ics#readme",
-  "dependencies": {
-    "ics-js": "angeloashmore/ics-js"
-  },
   "devDependencies": {
     "babel-core": "^6.7.4",
     "babel-eslint": "^6.0.2",
@@ -48,5 +45,8 @@
       "bookmarklet.js"
     ],
     "parser": "babel-eslint"
+  },
+  "dependencies": {
+    "ics-js": "^0.8.10"
   }
 }
