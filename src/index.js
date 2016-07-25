@@ -1,31 +1,20 @@
-import { VCALENDAR } from 'ics-js'
-import { CALENDAR } from 'constants'
-import { buildEvent, getShifts, validateLocation } from 'actions'
+import buildCalendar from './buildCalendar'
 
-try {
-  validateLocation()
+const hrefRegExp = /^https:\/\/mypage.apple.com\/myPage\/myTime.*/
 
-  const calendar = new VCALENDAR()
+if (!window.location.href.match(hrefRegExp)) {
+  window.alert('Please run this script on myPage Time Overview.')
+} else {
+  try {
+    const schDataEl = document.getElementById('schData')
+    const schData = JSON.parse(schDataEl.value)
 
-  calendar.addProp('VERSION', CALENDAR.VERSION)
-  calendar.addProp('PRODID', CALENDAR.PRODID)
+    const calendar = buildCalendar(schData)
+    const base64Data = window.btoa(calendar.toString())
 
-  const shifts = getShifts()
-
-  shifts.forEach((shift) => {
-    calendar.addComponent(buildEvent(shift))
-  })
-
-  calendar.toBase64()
-    .then((result) => {
-      window.location = result
-    })
-} catch (error) {
-  console.error(error)
-
-  if (error instanceof URIError) {
-    window.alert('Please run this script on MyPage Schedule.')
-  } else {
+    window.location = `data:text/calendar;base64,${base64Data}`
+  } catch (error) {
     window.alert('An error occured while parsing your schedule.')
+    console.error(error)
   }
 }

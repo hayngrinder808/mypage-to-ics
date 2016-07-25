@@ -1,0 +1,175 @@
+{
+  "23-Jul-2016": [
+    {
+      "amount": "6.50",
+      "startDate": "23-Jul-2016",
+      "endDate": "23-Jul-2016",
+      "startTime": "8:00 AM",
+      "endTime": "8:30 AM",
+      "shiftSegmentType": "TRANSFER",
+      "orgJobPath": "Store Admin",
+      "shiftSegmentDisplayName": "Store Admin",
+      "colorCode": "006600",
+      "shiftOrgJobPath": "Organization/Apple Inc/Apple Stores/Apple Store- America/Apple Stores USA/Market Team 9/R073/3.  Operations/Store Admin",
+      "startDayNumber": "1",
+      "endDayNumber": "1"
+    },
+    {
+      "startDate": "23-Jul-2016",
+      "endDate": "23-Jul-2016",
+      "startTime": "8:30 AM",
+      "endTime": "10:00 AM",
+      "shiftSegmentType": "TRANSFER",
+      "orgJobPath": "Runner Restock",
+      "shiftSegmentDisplayName": "Runner Restock",
+      "colorCode": "D3D3D3",
+      "shiftOrgJobPath": "Organization/Apple Inc/Apple Stores/Apple Store- America/Apple Stores USA/Market Team 9/R073/3.  Operations/Runner Restock",
+      "startDayNumber": "1",
+      "endDayNumber": "1"
+    },
+    {
+      "amount": "6.50",
+      "startDate": "23-Jul-2016",
+      "endDate": "23-Jul-2016",
+      "startTime": "10:00 AM",
+      "endTime": "10:15 AM",
+      "shiftSegmentType": "BREAK"
+    },
+    {
+      "startDate": "23-Jul-2016",
+      "endDate": "23-Jul-2016",
+      "startTime": "10:15 AM",
+      "endTime": "12:00 PM",
+      "shiftSegmentType": "TRANSFER",
+      "orgJobPath": "Runner Restock",
+      "shiftSegmentDisplayName": "Runner Restock",
+      "colorCode": "D3D3D3",
+      "shiftOrgJobPath": "Organization/Apple Inc/Apple Stores/Apple Store- America/Apple Stores USA/Market Team 9/R073/3.  Operations/Runner Restock",
+      "startDayNumber": "1",
+      "endDayNumber": "1"
+    },
+    {
+      "amount": "6.50",
+      "startDate": "23-Jul-2016",
+      "endDate": "23-Jul-2016",
+      "startTime": "12:00 PM",
+      "endTime": "12:30 PM",
+      "shiftSegmentType": "Meal",
+      "shiftSegmentDisplayName": "Meal Break",
+      "colorCode": "737373"
+    },
+    {
+      "startDate": "23-Jul-2016",
+      "endDate": "23-Jul-2016",
+      "startTime": "12:30 PM",
+      "endTime": "3:00 PM",
+      "shiftSegmentType": "TRANSFER",
+      "orgJobPath": "Runner Restock",
+      "shiftSegmentDisplayName": "Runner Restock",
+      "colorCode": "D3D3D3",
+      "shiftOrgJobPath": "Organization/Apple Inc/Apple Stores/Apple Store- America/Apple Stores USA/Market Team 9/R073/3.  Operations/Runner Restock",
+      "startDayNumber": "1",
+      "endDayNumber": "1"
+    }
+  ],
+  "28-Jul-2016": [
+    {
+      "amount": "5.00",
+      "startDate": "28-Jul-2016",
+      "endDate": "28-Jul-2016",
+      "startTime": "5:00 PM",
+      "endTime": "6:30 PM",
+      "shiftSegmentType": "TRANSFER",
+      "orgJobPath": "Store Admin",
+      "shiftSegmentDisplayName": "Store Admin",
+      "colorCode": "006600",
+      "shiftOrgJobPath": "Organization/Apple Inc/Apple Stores/Apple Store- America/Apple Stores USA/Market Team 9/R073/3.  Operations/Store Admin",
+      "startDayNumber": "1",
+      "endDayNumber": "1"
+    },
+    {
+      "startDate": "28-Jul-2016",
+      "endDate": "28-Jul-2016",
+      "startTime": "6:30 PM",
+      "endTime": "8:15 PM",
+      "shiftSegmentType": "TRANSFER",
+      "orgJobPath": "Returning",
+      "shiftSegmentDisplayName": "Returning",
+      "colorCode": "696969",
+      "shiftOrgJobPath": "Organization/Apple Inc/Apple Stores/Apple Store- America/Apple Stores USA/Market Team 9/R073/3.  Operations/Returning",
+      "startDayNumber": "1",
+      "endDayNumber": "1"
+    },
+    {
+      "amount": "5.00",
+      "startDate": "28-Jul-2016",
+      "endDate": "28-Jul-2016",
+      "startTime": "8:15 PM",
+      "endTime": "8:30 PM",
+      "shiftSegmentType": "BREAK"
+    },
+    {
+      "startDate": "28-Jul-2016",
+      "endDate": "28-Jul-2016",
+      "startTime": "8:30 PM",
+      "endTime": "10:00 PM",
+      "shiftSegmentType": "TRANSFER",
+      "orgJobPath": "Returning",
+      "shiftSegmentDisplayName": "Returning",
+      "colorCode": "696969",
+      "shiftOrgJobPath": "Organization/Apple Inc/Apple Stores/Apple Store- America/Apple Stores USA/Market Team 9/R073/3.  Operations/Returning",
+      "startDayNumber": "1",
+      "endDayNumber": "1"
+    }
+  ],
+  "01-Aug-2016": [
+    {
+      "amount": "4.00",
+      "startDate": "01-Aug-2016",
+      "endDate": "01-Aug-2016",
+      "startTime": "6:00 PM",
+      "endTime": "6:30 PM",
+      "shiftSegmentType": "TRANSFER",
+      "orgJobPath": "Store Admin",
+      "shiftSegmentDisplayName": "Store Admin",
+      "colorCode": "006600",
+      "shiftOrgJobPath": "Organization/Apple Inc/Apple Stores/Apple Store- America/Apple Stores USA/Market Team 9/R073/3.  Operations/Store Admin",
+      "startDayNumber": "1",
+      "endDayNumber": "1"
+    },
+    {
+      "startDate": "01-Aug-2016",
+      "endDate": "01-Aug-2016",
+      "startTime": "6:30 PM",
+      "endTime": "8:45 PM",
+      "shiftSegmentType": "TRANSFER",
+      "orgJobPath": "Runner Restock",
+      "shiftSegmentDisplayName": "Runner Restock",
+      "colorCode": "D3D3D3",
+      "shiftOrgJobPath": "Organization/Apple Inc/Apple Stores/Apple Store- America/Apple Stores USA/Market Team 9/R073/3.  Operations/Runner Restock",
+      "startDayNumber": "1",
+      "endDayNumber": "1"
+    },
+    {
+      "amount": "4.00",
+      "startDate": "01-Aug-2016",
+      "endDate": "01-Aug-2016",
+      "startTime": "8:45 PM",
+      "endTime": "9:00 PM",
+      "shiftSegmentType": "BREAK"
+    },
+    {
+      "startDate": "01-Aug-2016",
+      "endDate": "01-Aug-2016",
+      "startTime": "9:00 PM",
+      "endTime": "10:00 PM",
+      "shiftSegmentType": "TRANSFER",
+      "orgJobPath": "Runner Restock",
+      "shiftSegmentDisplayName": "Runner Restock",
+      "colorCode": "D3D3D3",
+      "shiftOrgJobPath": "Organization/Apple Inc/Apple Stores/Apple Store- America/Apple Stores USA/Market Team 9/R073/3.  Operations/Runner Restock",
+      "startDayNumber": "1",
+      "endDayNumber": "1"
+    }
+  ]
+}
