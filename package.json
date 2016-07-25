@@ -34,7 +34,8 @@
     "webpack": "^1.13.1"
   },
   "dependencies": {
-    "immutable-ics": "^0.2.2",
+    "immutable-ics": "^0.2.4",
+    "lodash.capitalize": "^4.1.1",
     "lodash.flatmap": "^4.3.0",
     "lodash.values": "^4.1.0",
     "simple-guid": "0.0.1"
