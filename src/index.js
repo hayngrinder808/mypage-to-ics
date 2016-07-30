@@ -1,12 +1,11 @@
 import buildCalendar from './buildCalendar'
 
-const hrefRegExp = /^https:\/\/mypage.apple.com\/myPage\/myTime.*/
+const schDataEl = document.getElementById('schData')
 
-if (!window.location.href.match(hrefRegExp)) {
+if (!schDataEl) {
   window.alert('Please run this script on myPage Time Overview.')
 } else {
   try {
-    const schDataEl = document.getElementById('schData')
     const schData = JSON.parse(schDataEl.value)
 
     const calendar = buildCalendar(schData)
