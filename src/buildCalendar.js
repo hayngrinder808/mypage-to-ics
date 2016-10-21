@@ -21,7 +21,7 @@ const buildEvent = (segments) => {
   const start = new Date(`${startDate} ${startTime}`)
   const end = new Date(`${endDate} ${endTime}`)
 
-  const summary = `You work ${startTime} - ${endTime}`
+  const summary = ` ${startTime} - ${endTime}`
 
   const description = segments.map((segment) => {
     const {
