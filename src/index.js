@@ -9,9 +9,19 @@ if (!schDataEl) {
     const schData = JSON.parse(schDataEl.value)
 
     const calendar = buildCalendar(schData)
-    const base64Data = window.btoa(calendar.toString())
 
-    window.location = `data:text/calendar;base64,${base64Data}`
+    const blob = new Blob([calendar.toString()], { type: 'text/calendar' })
+
+    const reader = new window.FileReader()
+
+    const promise = new Promise((resolve, reject) => {
+      reader.readAsDataURL(blob)
+      reader.onloadend = () => resolve(reader.result)
+      reader.onerror = () => reject(reader.error)
+      reader.onabort = () => reject()
+    }).then((result) => {
+      window.location = result
+    })
   } catch (error) {
     window.alert('An error occured while parsing your schedule.')
     console.error(error)
